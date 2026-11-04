@@ -7,15 +7,15 @@ public class TestScript : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        InputManager.I.OnLClickStarted += () => isTesting = true;
-        InputManager.I.OnLClickEnded += () => isTesting = false;
+        InputManager.I.OnLClickStart += () => isTesting = true;
+        InputManager.I.OnLClickEnd += () => isTesting = false;
     }
 
     // Update is called once per frame
     void Update()
     {
         if (isTesting)
-            Test();
+            print("test");
     }
 
     private void Test()

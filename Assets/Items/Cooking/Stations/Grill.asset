@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67cf1f61529da484c89a008924663d5a, type: 3}
+  m_Name: Grill
+  m_EditorClassIdentifier: Assembly-CSharp::CookingStationData
+  cookingMethod: 3
+  avaibleRecepies:
+  - {fileID: 11400000, guid: 8d90f859c933ca448864cb959ff276ab, type: 2}
+  - {fileID: 11400000, guid: db799e117da54c94e8482ce40df0d5d1, type: 2}

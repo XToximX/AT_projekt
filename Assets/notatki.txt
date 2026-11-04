@@ -1,2 +1,4 @@
 TO DO
-w skrypcie CookingStation stworzyæ funkcjê porównuj¹c¹ sk³adniki
+dodaæ, ¿eby skladniki sie usuwa³y jak sie je zdejmuje ze slotów, bo na razie mo¿na jeden skladnik w teorii dac kilka razy
+zeby gotowanie dodawa³o skladnik w jakies konkretne miejsce, a nie tylko pokazowe
+system inventory, ¿eby by³o gdzie przetrzymywaæ itemki do gotowania

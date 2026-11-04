@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public abstract class Item : ScriptableObject
+public abstract class ItemData : ScriptableObject
 {
     new public string name;
     public Sprite sprite;

@@ -8,8 +8,10 @@ public class InputManager : MonoBehaviour
 
     private InputSystem_Actions inputActions;
 
-    public event Action OnLClickStarted;
-    public event Action OnLClickEnded;
+    public event Action OnLClickStart;
+    public event Action OnLClickEnd;
+
+    public Vector2 MousePos => Mouse.current.position.ReadValue();
 
     private void Awake()
     {
@@ -28,25 +30,25 @@ public class InputManager : MonoBehaviour
     {
         inputActions.Gameplay.Enable();
 
-        inputActions.Gameplay.LClick.started += HandleLClickStarted;
-        inputActions.Gameplay.LClick.canceled += HandleLClickEnded;
+        inputActions.Gameplay.LClick.started += HandleLClickStart;
+        inputActions.Gameplay.LClick.canceled += HandleLClickEnd;
     }
 
     private void OnDisable()
     {
         inputActions.Gameplay.Disable();
 
-        inputActions.Gameplay.LClick.started -= HandleLClickStarted;
-        inputActions.Gameplay.LClick.canceled -= HandleLClickEnded;
+        inputActions.Gameplay.LClick.started -= HandleLClickStart;
+        inputActions.Gameplay.LClick.canceled -= HandleLClickEnd;
     }
 
-    private void HandleLClickStarted(InputAction.CallbackContext context)
+    private void HandleLClickStart(InputAction.CallbackContext context)
     {
-        OnLClickStarted?.Invoke();
+        OnLClickStart?.Invoke();
     }
 
-    private void HandleLClickEnded(InputAction.CallbackContext context)
+    private void HandleLClickEnd(InputAction.CallbackContext context)
     {
-        OnLClickEnded?.Invoke();
+        OnLClickEnd?.Invoke();
     }
 }

@@ -6,24 +6,51 @@ public class CookingStation : MonoBehaviour
 {
     [SerializeField] private CookingStationData stationData;
 
-    public Item Cook(List<Ingridient> input)
-    {
-        foreach (Recipe recipe in stationData.avaibleRecepies)
-        {
-            if (MatchesRecipe(recipe.ingridientList, input))
-                return recipe.result;
-        }
+    [SerializeField] private List<Transform> slotsPos;
+    private List<GameObject> ingridients;
+    private int occupiedSlotsCount = 0;
 
-        return null;
+    [SerializeField] FoodObject resultFood;
+
+    private void Start()
+    {
+        ingridients = new List<GameObject>();
+
+        for(int i = 0; i < slotsPos.Count; i++)
+            ingridients.Add(null);
     }
 
-    private bool MatchesRecipe(List<Ingridient> recipe, List<Ingridient> input)
+    public void Cook()
     {
-        if (recipe.Count !=  input.Count) return false;
+        foreach (RecipeData recipe in stationData.avaibleRecepies)
+        {
+            if (MatchesRecipe(recipe.IngridientList))
+            {
+                resultFood.SetFood(recipe.result);
+                ClearIngridients();
+                //return recipe.result;
+            }
+        }
 
-        Dictionary<Ingridient, int> counts = new Dictionary<Ingridient, int>();
+        //return null;
+    }
 
-        foreach (Ingridient ingridient in recipe)
+    private bool MatchesRecipe(List<FoodData> recipe)
+    {
+        List<FoodData> input = new List<FoodData>();
+
+        foreach(GameObject ingridient in ingridients)
+        {
+            if (ingridient == null)
+                continue;
+            input.Add(ingridient.GetComponent<FoodObject>().FoodData);
+        }
+
+        if (recipe.Count != input.Count) return false;
+
+        Dictionary<FoodData, int> counts = new Dictionary<FoodData, int>();
+
+        foreach (FoodData ingridient in recipe)
         {
             if (counts.ContainsKey(ingridient))
                 counts[ingridient]++;
@@ -31,7 +58,7 @@ public class CookingStation : MonoBehaviour
                 counts.Add(ingridient, 1);
         }
 
-        foreach (Ingridient ingridient in input)
+        foreach (FoodData ingridient in input)
         {
             if (!counts.ContainsKey(ingridient))
                 return false;
@@ -43,5 +70,33 @@ public class CookingStation : MonoBehaviour
         }
          
         return true;
+    }
+
+    public bool TryPlaceItem(GameObject item)
+    {
+        if (occupiedSlotsCount == slotsPos.Count)
+            return false;
+
+        ingridients[occupiedSlotsCount] = item;
+
+        item.transform.position = slotsPos[occupiedSlotsCount].position;
+
+        occupiedSlotsCount++;
+
+        return true;
+    }
+
+    private void ClearIngridients()
+    {
+        occupiedSlotsCount = 0;
+
+        for(int i = 0; i < ingridients.Count; i++)
+        {
+            if( ingridients[i] != null )
+            {
+                Destroy(ingridients[i]);
+                
+            }
+        }
     }
 }

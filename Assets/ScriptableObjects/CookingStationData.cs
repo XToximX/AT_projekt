@@ -1,9 +1,9 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-[CreateAssetMenu(fileName = "CookingStationData", menuName = "ScriptableObjects/Cooking")]
+[CreateAssetMenu(fileName = "CookingStationData", menuName = "ScriptableObjects/Cooking/CookingStationData")]
 public class CookingStationData : ScriptableObject
 {
     public CookingMethod cookingMethod;
-    public List<Recipe> avaibleRecepies;
+    public List<RecipeData> avaibleRecepies;
 }
